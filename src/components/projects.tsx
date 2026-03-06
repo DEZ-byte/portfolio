@@ -50,7 +50,6 @@ const projects = [
       "Team project \u00b7 EAS 587",
     ],
     tech: ["Python", "MCP", "Network Analysis", "Reddit API"],
-    link: "https://github.com/kambleakash0/echo_chamber_analysis_reddit_eas587",
     gradient: "from-emerald-500 to-teal-500",
   },
 ];
