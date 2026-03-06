@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github } from "lucide-react";
 
 const projects = [
   {
@@ -85,24 +84,11 @@ export default function Projects() {
                 className={`absolute top-0 left-6 right-6 h-px bg-gradient-to-r ${project.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
               />
 
-              <div className="flex items-start justify-between mb-3">
-                <div>
-                  <h4 className="text-lg font-bold text-white">
-                    {project.title}
-                  </h4>
-                  <p className="text-xs text-gray-500">{project.subtitle}</p>
-                </div>
-                {project.link && (
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-600 hover:text-violet-400 transition-colors"
-                    aria-label={`View ${project.title} on GitHub`}
-                  >
-                    <Github size={18} />
-                  </a>
-                )}
+              <div className="mb-3">
+                <h4 className="text-lg font-bold text-white">
+                  {project.title}
+                </h4>
+                <p className="text-xs text-gray-500">{project.subtitle}</p>
               </div>
 
               <p className="text-gray-400 text-sm mb-4 grow">
