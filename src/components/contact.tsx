@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Linkedin, Github, Phone } from "lucide-react";
+import { Mail, Linkedin, Github, Phone, ArrowUpRight } from "lucide-react";
 
 const contactLinks = [
   {
@@ -28,30 +28,29 @@ const contactLinks = [
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-16 px-6">
-      <div className="max-w-4xl mx-auto text-center">
+    <section id="contact" className="py-24 md:py-32 px-6 bg-[#f5f5f7]">
+      <div className="max-w-[980px] mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-sm font-mono text-violet-400 mb-2">Contact</h2>
-          <h3 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-            Let&apos;s Connect
-          </h3>
-          <p className="text-gray-500 max-w-md mx-auto mb-12">
-            I&apos;m always open to discussing new opportunities, interesting
-            projects, or collaborations in AI and ML.
+          <h2 className="text-4xl md:text-5xl font-bold text-[#1d1d1f] tracking-tight mb-3">
+            Let&apos;s connect.
+          </h2>
+          <p className="text-[#86868b] text-lg max-w-md mb-12">
+            Open to new opportunities, collaborations, and interesting
+            conversations about AI and ML.
           </p>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-lg mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl"
         >
           {contactLinks.map((link, i) => (
             <a
@@ -63,15 +62,18 @@ export default function Contact() {
                   ? "noopener noreferrer"
                   : undefined
               }
-              className="flex items-center gap-3 p-4 rounded-lg bg-gray-900/50 border border-gray-800 hover:border-violet-500/30 transition-all duration-200 group"
+              className="group flex items-center justify-between p-4 rounded-xl bg-white hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)] transition-shadow duration-300"
             >
-              <link.icon
-                className="text-violet-400 shrink-0"
-                size={18}
+              <div className="flex items-center gap-3 min-w-0">
+                <link.icon className="text-[#86868b] shrink-0" size={16} />
+                <span className="text-[#1d1d1f] text-sm truncate">
+                  {link.label}
+                </span>
+              </div>
+              <ArrowUpRight
+                size={14}
+                className="text-[#d2d2d7] group-hover:text-[#2997ff] shrink-0 transition-colors duration-300"
               />
-              <span className="text-gray-400 text-sm group-hover:text-white transition-colors truncate">
-                {link.label}
-              </span>
             </a>
           ))}
         </motion.div>
