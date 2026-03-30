@@ -56,36 +56,36 @@ const skillCategories = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-16 px-6">
-      <div className="max-w-4xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
+    <section id="skills" className="py-24 md:py-32 px-6 bg-white">
+      <div className="max-w-[980px] mx-auto">
+        <motion.h2
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
+          className="text-4xl md:text-5xl font-bold text-[#1d1d1f] tracking-tight mb-14"
         >
-          <h2 className="text-sm font-mono text-violet-400 mb-2">Skills</h2>
-          <h3 className="text-3xl md:text-4xl font-bold mb-12 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-            Technologies I work with
-          </h3>
-        </motion.div>
+          Skills.
+        </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {skillCategories.map((cat, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="p-6 rounded-xl bg-gray-900/50 border border-gray-800"
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              className="p-6 rounded-2xl bg-[#f5f5f7]"
             >
-              <h4 className="text-white font-semibold mb-4">{cat.title}</h4>
+              <h3 className="text-[#1d1d1f] font-semibold text-sm mb-4">
+                {cat.title}
+              </h3>
               <div className="flex flex-wrap gap-2">
                 {cat.skills.map((skill, j) => (
                   <span
                     key={j}
-                    className="text-sm text-gray-400 px-3 py-1 rounded-full border border-gray-800 hover:border-violet-500/30 hover:text-violet-300 transition-colors duration-200 cursor-default"
+                    className="text-sm text-[#6e6e73] px-3 py-1.5 rounded-full bg-white"
                   >
                     {skill}
                   </span>

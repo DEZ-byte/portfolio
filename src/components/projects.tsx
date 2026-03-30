@@ -1,125 +1,174 @@
 "use client";
 
+import { useRef } from "react";
 import { motion } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const projects = [
   {
     title: "CVE Security Data Lakehouse",
-    subtitle: "Medallion Architecture",
+    category: "Data Engineering",
     description:
-      "Production-grade data pipeline on Databricks processing 40K+ cybersecurity vulnerabilities for enterprise-scale risk analysis. Implemented Bronze to Silver to Gold Medallion architecture with Delta Lake ACID transactions transforming 318K raw JSON files into analytics-ready tables.",
-    stats: [
-      "318K raw files",
-      "4,000+ vendors",
-      "1,816 critical CVEs",
+      "Production-grade pipeline on Databricks processing 40K+ cybersecurity vulnerabilities. Bronze-Silver-Gold Medallion architecture with Delta Lake ACID transactions.",
+    metrics: [
+      { value: "318K", label: "Raw files" },
+      { value: "4,000+", label: "Vendors" },
+      { value: "1,816", label: "Critical CVEs" },
     ],
     tech: ["PySpark", "Delta Lake", "Databricks", "SQL"],
-    gradient: "from-violet-500 to-indigo-500",
+    accent: "#2997ff",
   },
   {
     title: "SQL-Grounded Analytics Agent",
-    subtitle: "Production AI Agent",
+    category: "AI Agent",
     description:
-      "Production agent that answers business questions by generating safe SQL instead of free-form text. Features schema-aware SQL generation with dry-run validation, query budget caps, and PII-aware row limits. Reduced wrong-answer rate 48% vs plain RAG.",
-    stats: [
-      "48% fewer errors vs RAG",
-      "p90: 280ms",
-      "Source-of-truth checks",
+      "Production agent answering business questions via safe SQL generation. Schema-aware with dry-run validation, query budget caps, and PII-aware row limits.",
+    metrics: [
+      { value: "48%", label: "Fewer errors" },
+      { value: "280ms", label: "p90 latency" },
+      { value: "100%", label: "Validated" },
     ],
     tech: ["Python", "LangChain", "OpenAI API", "SQLAlchemy", "Pinecone"],
-    gradient: "from-cyan-500 to-blue-500",
+    accent: "#30d158",
   },
   {
     title: "Real-Time Product Detection",
-    subtitle: "Retail Analytics",
+    category: "Computer Vision",
     description:
-      "Fine-tuned a YOLOv8 object detection model to identify 50+ product SKUs from retail shelf images, achieving 0.92 mAP. Deployed as a REST API via Flask/Docker on GCP for real-time inventory tracking.",
-    stats: ["0.92 mAP", "50+ SKUs", "400% data augmentation"],
+      "Fine-tuned YOLOv8 to identify 50+ product SKUs from retail shelf images. Deployed as REST API via Flask/Docker on GCP for real-time inventory tracking.",
+    metrics: [
+      { value: "0.92", label: "mAP score" },
+      { value: "50+", label: "SKUs" },
+      { value: "400%", label: "Augmentation" },
+    ],
     tech: ["PyTorch", "YOLOv8", "Flask", "Docker", "GCP"],
-    gradient: "from-amber-500 to-orange-500",
+    accent: "#ff9f0a",
   },
   {
     title: "Echo Chamber Analysis",
-    subtitle: "Reddit Social Network Analysis",
+    category: "Social Network Analysis",
     description:
-      "Analyzed echo chamber formation patterns on Reddit using social network analysis techniques. Led the MCP (Model Context Protocol) implementation to enable AI-powered analysis of community polarization and information flow dynamics.",
-    stats: [
-      "MCP integration",
-      "Network analysis",
-      "Team project \u00b7 EAS 587",
+      "Analyzed echo chamber formation on Reddit using network analysis. Led the MCP implementation enabling AI-powered analysis of community polarization.",
+    metrics: [
+      { value: "MCP", label: "Integration" },
+      { value: "NLP", label: "Analysis" },
+      { value: "EAS 587", label: "Research" },
     ],
     tech: ["Python", "MCP", "Network Analysis", "Reddit API"],
-    gradient: "from-emerald-500 to-teal-500",
+    accent: "#bf5af2",
   },
 ];
 
 export default function Projects() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: "left" | "right") => {
+    if (!scrollRef.current) return;
+    const cardWidth = scrollRef.current.firstElementChild
+      ? (scrollRef.current.firstElementChild as HTMLElement).offsetWidth + 24
+      : 400;
+    scrollRef.current.scrollBy({
+      left: direction === "left" ? -cardWidth : cardWidth,
+      behavior: "smooth",
+    });
+  };
+
   return (
-    <section id="projects" className="py-16 px-6">
-      <div className="max-w-4xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-sm font-mono text-violet-400 mb-2">Projects</h2>
-          <h3 className="text-3xl md:text-4xl font-bold mb-12 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-            What I&apos;ve built
-          </h3>
-        </motion.div>
+    <section id="projects" className="py-24 md:py-32 bg-[#f5f5f7]">
+      <div className="max-w-[980px] mx-auto px-6">
+        <div className="flex items-end justify-between mb-14">
+          <motion.h2
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
+            className="text-4xl md:text-5xl font-bold text-[#1d1d1f] tracking-tight"
+          >
+            Projects.
+          </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {projects.map((project, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="group relative p-6 rounded-xl bg-gray-900/50 border border-gray-800 hover:border-gray-700 transition-all duration-300 flex flex-col"
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="hidden md:flex items-center gap-2"
+          >
+            <button
+              onClick={() => scroll("left")}
+              className="w-10 h-10 rounded-full bg-white border border-[#d2d2d7] flex items-center justify-center text-[#86868b] hover:text-[#1d1d1f] hover:border-[#86868b] transition-all duration-200"
+              aria-label="Previous project"
             >
-              {/* Gradient accent line at top */}
-              <div
-                className={`absolute top-0 left-6 right-6 h-px bg-gradient-to-r ${project.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-              />
-
-              <div className="mb-3">
-                <h4 className="text-lg font-bold text-white">
-                  {project.title}
-                </h4>
-                <p className="text-xs text-gray-500">{project.subtitle}</p>
-              </div>
-
-              <p className="text-gray-400 text-sm mb-4 grow">
-                {project.description}
-              </p>
-
-              <div className="space-y-3">
-                <div className="flex flex-wrap gap-1.5">
-                  {project.stats.map((stat, j) => (
-                    <span
-                      key={j}
-                      className="text-xs text-gray-500 bg-gray-800/50 px-2 py-0.5 rounded"
-                    >
-                      {stat}
-                    </span>
-                  ))}
-                </div>
-                <div className="flex flex-wrap gap-1.5">
-                  {project.tech.map((t, j) => (
-                    <span
-                      key={j}
-                      className="text-xs text-violet-300 px-2 py-0.5 rounded-full border border-gray-800"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          ))}
+              <ChevronLeft size={18} />
+            </button>
+            <button
+              onClick={() => scroll("right")}
+              className="w-10 h-10 rounded-full bg-white border border-[#d2d2d7] flex items-center justify-center text-[#86868b] hover:text-[#1d1d1f] hover:border-[#86868b] transition-all duration-200"
+              aria-label="Next project"
+            >
+              <ChevronRight size={18} />
+            </button>
+          </motion.div>
         </div>
+      </div>
+
+      {/* Horizontal scroll carousel */}
+      <div
+        ref={scrollRef}
+        className="flex gap-6 overflow-x-auto no-scrollbar px-6 md:px-[max(1.5rem,calc((100vw-980px)/2+1.5rem))] snap-x snap-mandatory"
+      >
+        {projects.map((project, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.5, delay: i * 0.08 }}
+            className="snap-start shrink-0 w-[340px] md:w-[420px] p-6 md:p-8 rounded-2xl bg-white shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-shadow duration-300 flex flex-col"
+          >
+            <p
+              className="text-xs font-medium tracking-wide uppercase mb-2"
+              style={{ color: project.accent }}
+            >
+              {project.category}
+            </p>
+            <h3 className="text-xl font-bold text-[#1d1d1f] mb-3">
+              {project.title}
+            </h3>
+            <p className="text-[#86868b] text-sm leading-relaxed mb-6 grow">
+              {project.description}
+            </p>
+
+            {/* Metrics row */}
+            <div className="flex gap-4 mb-5">
+              {project.metrics.map((m, j) => (
+                <div key={j}>
+                  <p
+                    className="text-xl font-bold"
+                    style={{ color: project.accent }}
+                  >
+                    {m.value}
+                  </p>
+                  <p className="text-[10px] text-[#86868b] uppercase tracking-wide">
+                    {m.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Tech tags */}
+            <div className="flex flex-wrap gap-1.5">
+              {project.tech.map((t, j) => (
+                <span
+                  key={j}
+                  className="text-xs text-[#86868b] px-2.5 py-1 rounded-full bg-[#f5f5f7]"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+        ))}
       </div>
     </section>
   );
